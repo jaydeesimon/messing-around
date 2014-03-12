@@ -2,7 +2,7 @@ import scala.io.Source
 
 object BowlingScore {
   def main(args: Array[String]): Unit = {
-    val frames = new Frames("input2.txt")
+    val frames = new Frames("input.txt")
     val score = frames.score
     println(score)
   }
