@@ -1,0 +1,14 @@
+You are writing a program to determine a player's score after a game of 10-pin bowling.
+
+A description of bowling scores can be found here: http://bowling.about.com/od/rulesofthegame/a/bowlingscoring.htm
+
+Pay attention to what happens when a player gets a strike or a spare in their last frame!
+
+The input to your program, the first command-line argument, is the name of a file which describes the complete game. 
+The contents of the file give the frame-by-frame results of the game, one frame per line. Each line looks like this:
+5 2
+The number of pins knocked down by each roll is given, separated by a space if the player did not get a strike.
+
+You can assume the input file will exist, will be correctly formatted, and will contain exactly 10 frames.
+
+A sample input file, "input.txt", is available for testing.
