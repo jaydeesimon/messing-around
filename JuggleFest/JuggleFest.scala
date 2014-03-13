@@ -2,7 +2,7 @@ import scala.io.Source
 import scala.util.matching.Regex
 
 case class Circuit(name: String, coordination: Int, endurance: Int, pizazz: Int)
-case class Juggler(name: String, coordination: Int, endurance: Int, pizazz: Int, preferredCircuits: Seq[Circuit])
+case class Juggler(name: String, coordination: Int, endurance: Int, pizazz: Int, preferredCircuits: Array[String])
 
 object JuggleFest {
   def main(args: Array[String]) = {
@@ -27,7 +27,7 @@ object JuggleFest {
   }
 
   def parseCircuitLine(circuitLine: String): Circuit = {
-    val regex = new Regex("""\w (\w+) H:(\d+) E:(\d+) P:(\d+)""", "name", "h", "e", "p")
+    val regex = new Regex("""C (\w+) H:(\d+) E:(\d+) P:(\d+)""", "name", "h", "e", "p")
     regex.findFirstMatchIn(circuitLine) match {
       case Some(parsedLine) => 
         Circuit(
@@ -41,7 +41,18 @@ object JuggleFest {
   }
 
   def parseJugglerLine(jugglerLine: String): Juggler = {
-    val regex = new
+    val regex = new Regex("""J (\w+) H:(\d+) E:(\d+) P:(\d+) (.+)""", "name", "h", "e", "p", "prefs")
+    regex.findFirstMatchIn(jugglerLine) match {
+      case Some(parsedLine) =>
+        Juggler(
+          parsedLine.group("name"),
+          parsedLine.group("h").toInt,
+          parsedLine.group("e").toInt,
+          parsedLine.group("p").toInt,
+          parsedLine.group("prefs").split(",")
+        )
+      case None => throw new RuntimeException("Unparseable juggler line: " + jugglerLine)
+    }
   }
 }
 
